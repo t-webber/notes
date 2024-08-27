@@ -1,20 +1,25 @@
 # Logs
 logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+*.log*
+*.log*
+*.log*
+*.log*
+*.log*
 
+
+# Vite
 node_modules
+out 
 dist
 dist-ssr
-*.local
+*local*
 
-# Editor directories and files
+# Rust
+target
+gen
+
+# IDEs
 .vscode/*
-!.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
@@ -25,3 +30,4 @@ dist-ssr
 
 # Custom
 *lock*
+.*/ 
