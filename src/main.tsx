@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import Router from './router.tsx'
 import Bar from './bar.tsx'
 
 createRoot(document.getElementById("main")!).render(
@@ -10,7 +10,7 @@ createRoot(document.getElementById("main")!).render(
         <Bar />
       </div>
       <div className="h-100% w-full p-2 bg-black">
-        <App />
+        <Router />
       </div>
     </div>
   </StrictMode>,
