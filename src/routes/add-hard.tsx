@@ -1,5 +1,9 @@
+import AddArea from "../components/add-area";
+
+const updateContent = (s: string) => console.log(s)
+
 export default function AddHard() {
     return (
-        <div className="h-full flex items-center justify-center"><p>Add hard</p></div>
+        <AddArea updateContent={updateContent} />
     )
 }
