@@ -5,11 +5,11 @@ import Bar from './bar.tsx'
 
 createRoot(document.getElementById("main")!).render(
   <StrictMode>
-    <div className="flex text-white">
-      <div className=" bg-neutral-800 p-2 h-screen">
+    <div className="flex text-white h-screen">
+      <div className="bg-bar-color p-2 h-100%">
         <Bar />
       </div>
-      <div className="h-screen w-full p-2 bg-black">
+      <div className="h-100% w-full p-2 bg-black">
         <App />
       </div>
     </div>
