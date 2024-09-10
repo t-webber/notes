@@ -6,13 +6,13 @@ logs
 *.log*
 *.log*
 
-
 # Vite
 node_modules
-out 
+out
 dist
 dist-ssr
 *local*
+.env.*
 
 # Rust
 target
@@ -30,4 +30,4 @@ gen
 
 # Custom
 *lock*
-.*/ 
+.*/
