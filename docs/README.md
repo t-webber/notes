@@ -14,7 +14,7 @@ POSTGRESQL_PASSWORD="somepassword"
 ### Run on desktop
 
 ```shell
-npm i 
+npm i
 npm tauri dev
 ```
 
@@ -32,20 +32,20 @@ npm tauri android run
 
 #### Android Studio
 
-- Can be installed in portalbe.
-- Run `Android Studio` as administrator for the setup.
-- See on the tauri website for the environment variables.
+-   Can be installed in portalbe.
+-   Run `Android Studio` as administrator for the setup.
+-   See on the tauri website for the environment variables.
 
 #### `error sending request for url`
 
-- Replace `localhost` in `src-tauri\tauri.conf.json` by the LAN IP address (the one in `192.168.1.x` - most of the time given by `npm run`)
-- Make sure it is on the same port than the one used by the front-end.
+-   Replace `localhost` in `src-tauri\tauri.conf.json` by the LAN IP address (the one in `192.168.1.x` - most of the time given by `npm run`)
+-   Make sure it is on the same port than the one used by the front-end.
 
 #### No device found with `adb devices`
 
-- Deactivate/Reactivate developper options on your phone.
-- Enable USB debugging for this computer.
-- Kill and restart `adb kill-server`.
+-   Deactivate/Reactivate developper options on your phone.
+-   Enable USB debugging for this computer.
+-   Kill and restart `adb kill-server`.
 
 #### Package.json
 

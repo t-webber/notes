@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    --background: #010101;
+    --accent: #171717;
+    --muted: #999999;
+    --foreground: #ffffff;
+
+    --button-foreground: #f26446;
+    --button-background: #3a3a3a;
+
+    color: var(--foreground);
+    background: var(--background);
+}
