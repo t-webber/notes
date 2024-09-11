@@ -6,6 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite + React + TS</title>
         <link rel="stylesheet" href="/src/index.css" />
+        <script>
+            console.log("https://github.com/tauri-apps/tauri/issues/8357");
+            window.__TAURI_METADATA__ = Object.keys(
+                window.__TAURI_INTERNALS__.metadata
+            ).reduce((metadata, property) => {
+                metadata[`__${property}`] =
+                    window.__TAURI_INTERNALS__.metadata[property];
+                return metadata;
+            }, {});
+            window.__TAURI_INVOKE__ = window.__TAURI_INTERNALS__.invoke;
+            window.__TAURI_IPC__ = window.__TAURI_INTERNALS__.ipc;
+        </script>
     </head>
     <body>
         <main id="main"></main>

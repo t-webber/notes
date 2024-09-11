@@ -32,20 +32,30 @@ npm tauri android run
 
 #### Android Studio
 
--   Can be installed in portalbe.
--   Run `Android Studio` as administrator for the setup.
--   See on the tauri website for the environment variables.
+- Can be installed in portalbe.
+- Run `Android Studio` as administrator for the setup.
+- See on the tauri website for the environment variables.
+
+### Error fixing
 
 #### `error sending request for url`
 
--   Replace `localhost` in `src-tauri\tauri.conf.json` by the LAN IP address (the one in `192.168.1.x` - most of the time given by `npm run`)
--   Make sure it is on the same port than the one used by the front-end.
+- Replace `localhost` in `src-tauri\tauri.conf.json` by the LAN IP address (the one in `192.168.1.x` - most of the time given by `npm run`)
+- Make sure it is on the same port than the one used by the front-end.
 
-#### No device found with `adb devices`
+#### The `webview` window doesn't not open
 
--   Deactivate/Reactivate developper options on your phone.
--   Enable USB debugging for this computer.
--   Kill and restart `adb kill-server`.
+- Replace the ip in `192.168.1.x` in `tauri.config.json` by `localhost`.
+- Make sure the port is the same than the one used by the front-end.
+
+#### `window.__TAURI__` is undefined (or `window.__TAURI_INTERNALS__` is undefined)
+
+- You are running the app in your browser, not in the tauri app. Run `npm tauri dev` instead of `npm run dev` and make sure the app opens in `webview`.
+
+#### No device found with `adb devices` or the devices found are "unauthorized"
+
+- Deactivate/Reactivate usb debugging for this computer.
+- Kill and restart `adb kill-server`.
 
 #### Package.json
 

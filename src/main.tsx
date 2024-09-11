@@ -41,15 +41,15 @@ function NoteMain({
     const [content, setContent] = useState(noteContent);
 
     useEffect(() => {
-        setContent(content);
-    }, [content, setContent]);
+        editContent(content);
+    }, [content, editContent]);
 
     if (editing) {
         return (
             <textarea
                 value={content}
                 onChange={(e) => {
-                    editContent(e.currentTarget.value);
+                    setContent(e.currentTarget.value);
                 }}
                 className="bg-background outline-none focus:outline-none w-full h-full"
             />

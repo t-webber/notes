@@ -2,6 +2,7 @@ import { FiEdit } from "react-icons/fi";
 import Header from "./header";
 import Main from "./main";
 import { useEffect, useState } from "react";
+import * as api from "@tauri-apps/api/core";
 
 export interface Note {
     id: number;
@@ -9,36 +10,50 @@ export interface Note {
     content: string;
 }
 
-function getServerNotes() {
-    return [
-        { id: 0, title: "Note 0", content: "Content 0" },
-        { id: 1, title: "Note 1", content: "Content 1" },
-        { id: 2, title: "Note 2", content: "Content 2" },
-        { id: 3, title: "Note 3", content: "Content 3" },
-        { id: 4, title: "Note 4", content: "Content 4" },
-        { id: 5, title: "Note 5", content: "Content 5" },
-        { id: 6, title: "Note 6", content: "Content 6" },
-        { id: 7, title: "Note 7", content: "Content 7" },
-        { id: 8, title: "Note 8", content: "Content 8" },
-        { id: 9, title: "Note 9", content: "Content 9" },
-        { id: 10, title: "Note 10", content: "Content 10" },
-        { id: 11, title: "Note 11", content: "Content 11" },
-        { id: 12, title: "Note 12", content: "Content 12" },
-        { id: 13, title: "Note 13", content: "Content 13" },
-        { id: 14, title: "Note 14", content: "Content 14" },
-        { id: 15, title: "Note 15", content: "Content 15" },
-        { id: 16, title: "Note 16", content: "Content 16" },
-        { id: 17, title: "Note 17", content: "Content 17" },
-        { id: 18, title: "Note 18", content: "Content 18" },
-        { id: 19, title: "Note 19", content: "Content 19" },
-    ];
+async function getServerNotes(): Promise<Note[]> {
+    return await api.invoke("get_notes");
+    // return [
+    //     { id: 0, title: "Note 0", content: "Content 0" },
+    //     { id: 1, title: "Note 1", content: "Content 1" },
+    //     { id: 2, title: "Note 2", content: "Content 2" },
+    //     { id: 3, title: "Note 3", content: "Content 3" },
+    //     { id: 4, title: "Note 4", content: "Content 4" },
+    //     { id: 5, title: "Note 5", content: "Content 5" },
+    //     { id: 6, title: "Note 6", content: "Content 6" },
+    //     { id: 7, title: "Note 7", content: "Content 7" },
+    //     { id: 8, title: "Note 8", content: "Content 8" },
+    //     { id: 9, title: "Note 9", content: "Content 9" },
+    //     { id: 10, title: "Note 10", content: "Content 10" },
+    //     { id: 11, title: "Note 11", content: "Content 11" },
+    //     { id: 12, title: "Note 12", content: "Content 12" },
+    //     { id: 13, title: "Note 13", content: "Content 13" },
+    //     { id: 14, title: "Note 14", content: "Content 14" },
+    //     { id: 15, title: "Note 15", content: "Content 15" },
+    //     { id: 16, title: "Note 16", content: "Content 16" },
+    //     { id: 17, title: "Note 17", content: "Content 17" },
+    //     { id: 18, title: "Note 18", content: "Content 18" },
+    //     { id: 19, title: "Note 19", content: "Content 19" },
+    // ];
+}
+
+function blob() {
+    // api.invoke("my_custom_command").then((res) => {
+    //     console.log("res for api", res);
+    // });
+    // window.__TAURI__.core.invoke("my_custom_command").then((res) => {
+    //     console.log("res for window", res);
+    // });
 }
 
 export default function Router() {
     const [id, setId] = useState<number | null>(null);
     const [editing, setEditing] = useState(false);
-    const [getNotes, setNotes] = useState(getServerNotes());
+    const [getNotes, setNotes] = useState<Note[]>([]);
     const [note, setNote] = useState<Note | undefined>(undefined);
+
+    useEffect(() => {
+        getServerNotes().then((notes) => setNotes(notes));
+    });
 
     useEffect(() => {
         if (id !== null) {
@@ -59,6 +74,15 @@ export default function Router() {
 
     return (
         <div className="h-screen flex flex-col">
+            <button
+                onClick={() => {
+                    getServerNotes()
+                        .then((notes) => setNotes(notes))
+                        .catch((err) => console.log(err));
+                }}
+            >
+                Reset
+            </button>
             <header className="p-4 pb-4">
                 <Header
                     title={note?.title}

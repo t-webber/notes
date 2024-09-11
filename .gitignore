@@ -1,10 +1,6 @@
 # Logs
 logs
 *.log*
-*.log*
-*.log*
-*.log*
-*.log*
 
 # Vite
 node_modules
@@ -19,7 +15,7 @@ target
 gen
 
 # IDEs
-.vscode/*
+.vscode
 .idea
 .DS_Store
 *.suo

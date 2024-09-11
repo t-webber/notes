@@ -4,11 +4,12 @@
     "identifier": "com.tauri.dev",
     "build": {
         "frontendDist": "..",
-        "devUrl": "http://192.168.1.16:5173",
+        "devUrl": "http://localhost:5173",
         "beforeDevCommand": "npm run dev",
         "beforeBuildCommand": "npm run build"
     },
     "app": {
+        "withGlobalTauri": true,
         "windows": [
             {
                 "title": "window-title",
