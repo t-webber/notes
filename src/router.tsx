@@ -36,15 +36,6 @@ async function getServerNotes(): Promise<Note[]> {
     // ];
 }
 
-function blob() {
-    // api.invoke("my_custom_command").then((res) => {
-    //     console.log("res for api", res);
-    // });
-    // window.__TAURI__.core.invoke("my_custom_command").then((res) => {
-    //     console.log("res for window", res);
-    // });
-}
-
 export default function Router() {
     const [id, setId] = useState<number | null>(null);
     const [editing, setEditing] = useState(false);
@@ -72,17 +63,23 @@ export default function Router() {
             notes.map((note) => (note.id === id ? { ...note, content } : note))
         );
 
+    const [test, setTest] = useState(0);
+
     return (
         <div className="h-screen flex flex-col">
             <button
                 onClick={() => {
-                    getServerNotes()
-                        .then((notes) => setNotes(notes))
-                        .catch((err) => console.log(err));
+                    // getServerNotes()
+                    //     .then((notes) => setNotes(notes))
+                    //     .catch((err) => console.log(err));
+                    api.invoke("increase_counter").then((res) =>
+                        setTest(parseInt(`${res}`))
+                    );
                 }}
             >
                 Reset
             </button>
+            {test}
             <header className="p-4 pb-4">
                 <Header
                     title={note?.title}
