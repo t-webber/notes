@@ -1,29 +1,47 @@
-// use chrono::NaiveDateTime;
 use std::fs;
-use std::io;
-use std::io::Read;
 
-#[derive(serde::Deserialize, serde::Serialize)]
+#[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub struct Note {
     id: i32,
     title: String,
     content: String,
-    // updated_at: NaiveDateTime,
 }
 
-const JSON_DB: &str = "./db.json";
+pub trait ToErrString<T> {
+    fn to_err_string(self) -> Result<T, String>;
+}
+
+impl<T, E: ToString> ToErrString<T> for Result<T, E> {
+    fn to_err_string(self) -> Result<T, String> {
+        self.map_err(|err| err.to_string())
+    }
+}
+
+const DB_PATH: &str = "./db.json";
 
 #[tauri::command]
 pub fn get_notes() -> Result<Vec<Note>, String> {
-    let mut fd = fs::OpenOptions::new()
-        .create(true)
-        .truncate(true)
-        .write(true)
-        .read(true)
-        .open(JSON_DB)
-        .map_err(|err| err.to_string())?;
-    let mut content = String::new();
-    fd.read_to_string(&mut content)
-        .map_err(|err| err.to_string())?;
-    serde_json::from_str(&content).map_err(|err| err.to_string())
+    if let Ok(content) = fs::read_to_string(DB_PATH) {
+        serde_json::from_str(&content).to_err_string()
+    } else {
+        fs::OpenOptions::new()
+            .create(true)
+            .truncate(true)
+            .write(true)
+            .open(DB_PATH)
+            .to_err_string()?;
+        Err("Database not found".into())
+    }
+}
+
+#[tauri::command]
+pub fn write_notes(notes: Vec<Note>) -> Result<(), String> {
+    // println!("{notes:?}");
+    // dbg!(notes);
+    // Ok(())
+    if notes.is_empty() {
+        Err("WRITING AN EMPTY ARRAY!".into())
+    } else {
+        fs::write(DB_PATH, serde_json::to_string(&notes).to_err_string()?).to_err_string()
+    }
 }

@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Router from "./router";
+import ServerClientInterface from "./interface";
 
 createRoot(document.getElementById("main")!).render(
     <StrictMode>
-        <Router />
+        <ServerClientInterface />
     </StrictMode>
 );

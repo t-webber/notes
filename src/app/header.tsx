@@ -1,5 +1,5 @@
 import { SlMagnifier } from "react-icons/sl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 
@@ -30,20 +30,14 @@ function HomeHeader() {
 }
 
 function NoteHeader({
-    noteTitle,
+    title,
     setEditing,
     editTitle,
 }: {
-    noteTitle: string;
+    title: string;
     setEditing: (status: boolean) => void;
     editTitle: (title: string) => void;
 }) {
-    const [title, setTitle] = useState(noteTitle);
-
-    useEffect(() => {
-        setTitle(title);
-    }, [title]);
-
     return (
         <div className="flex space-x-4 items-center">
             <a href="/">
@@ -67,16 +61,13 @@ function NoteHeader({
     );
 }
 
-export default function Header({
-    title,
-    ...props
-}: {
+export default function Header(props: {
     title: string | undefined;
     setEditing: (status: boolean) => void;
     editTitle: (title: string) => void;
 }) {
-    if (title) {
-        return <NoteHeader noteTitle={title} {...props} />;
+    if (props.title) {
+        return <NoteHeader {...props} title={props.title} />;
     } else {
         return <HomeHeader />;
     }

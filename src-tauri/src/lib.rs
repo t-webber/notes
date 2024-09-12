@@ -19,6 +19,10 @@
 #![allow(clippy::mod_module_files)]
 #![allow(clippy::exhaustive_structs)]
 #![allow(clippy::arithmetic_side_effects)]
+//
+#![allow(clippy::needless_pass_by_value)]
+#![allow(clippy::module_name_repetitions)]
+#![allow(clippy::pub_use)]
 
 use std::sync::Mutex;
 use tauri::{Builder, Manager, State};
@@ -36,9 +40,9 @@ struct AppState {
 
 #[tauri::command]
 fn increase_counter(state: State<'_, Mutex<AppState>>) -> Result<u32, String> {
-    let mut state = state.lock().to_err_string()?;
-    state.counter += 1;
-    Ok(state.counter)
+    let mut mutex = state.lock().to_err_string()?;
+    mutex.counter += 1;
+    Ok(mutex.counter)
 }
 
 #[allow(
